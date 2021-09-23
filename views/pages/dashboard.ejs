@@ -1,0 +1,63 @@
+<!--
+=========================================================
+Material Dashboard - v2.1.2
+=========================================================
+
+Product Page: https://www.creative-tim.com/product/material-dashboard
+Copyright 2020 Creative Tim (https://www.creative-tim.com)
+Coded by Creative Tim
+
+=========================================================
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <%- include("../partials/headers") %>
+
+    <!-- ariel ws-->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      socket.on("announcements", function (data) {
+        
+        console.log(data.toLowerCase());
+        var dist = document.getElementById(data.toLowerCase());
+        dist.innerHTML = parseInt(dist.innerHTML)+1;
+        console.log("Got announcement:", data);
+      });
+    </script>
+    <script>
+      const selectElement = document.getElementById('crad-id');
+      selectElement.addEventListener('change', (event) => {
+      event.preventDefault();
+      });
+    </script>
+    <!--ariel ws -->
+  </head>
+
+  <body class="dark-edition">
+    <div class="wrapper">
+      <%- include("../partials/sidebar") %>
+      <div class="main-panel">
+        <%- include("../partials/navbar") %>
+        <div class="content">
+          <div class="container-fluid">
+            <div class="row">
+              <!--start-->
+              <% cards.forEach(function(card) { %> <%-
+              include("../partials/card",card) %> <% }); %>
+              <!--end-->
+            </div>
+            <div class="row"><%- include("../partials/graphs") %></div>
+            <div class="row">
+              <%- include("../partials/taskscard") %> <%-
+              include("../partials/employeeslist") %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <%- include("../partials/dashcode") %>
+  </body>
+</html>
