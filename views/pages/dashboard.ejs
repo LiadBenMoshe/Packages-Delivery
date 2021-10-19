@@ -17,7 +17,9 @@ The above copyright notice and this permission notice shall be included in all c
 
     <!-- ariel ws-->
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+      var isSizeChart=true;
       var socket = io();
       socket.on("announcements", function (data) {
         
@@ -26,6 +28,16 @@ The above copyright notice and this permission notice shall be included in all c
         dist.innerHTML = parseInt(dist.innerHTML)+1;
         console.log("Got announcement:", data);
       });
+
+      socket.on("firebase", function (result) {
+        for(var i=0;i<result.length;i++){
+          var arrive = document.getElementById(result[i]);
+          arrive.innerHTML = parseInt(arrive.innerHTML)+1;
+        }
+      });
+
+      
+
     </script>
     <script>
       const selectElement = document.getElementById('crad-id');
@@ -34,6 +46,7 @@ The above copyright notice and this permission notice shall be included in all c
       });
     </script>
     <!--ariel ws -->
+    
   </head>
 
   <body class="dark-edition">
@@ -49,15 +62,40 @@ The above copyright notice and this permission notice shall be included in all c
               include("../partials/card",card) %> <% }); %>
               <!--end-->
             </div>
-            <div class="row"><%- include("../partials/graphs") %></div>
-            <div class="row">
+            <!-- <div class="row"><%- include("../partials/graphs") %></div> -->
+            <!-- <div class="row">
               <%- include("../partials/taskscard") %> <%-
               include("../partials/employeeslist") %>
+            </div> -->
+            <button type="button" class="btn btn-danger" style="visibility: hidden;">sapce </button>
+            <button type="button" class="btn btn-danger" onclick="onClickDist(this)">Haifa Chart</button>
+            <button type="button" class="btn btn-success" onclick="onClickDist(this)">Dan Chart</button>
+            <button type="button" class="btn btn-info" onclick="onClickDist(this)">Center Chart</button>
+            <button type="button" class="btn btn-warning" onclick="onClickDist(this)">South Chart</button>
+            <button type="button" class="btn btn-rose" onclick="onClickDist(this)">Eilat Chart</button>
+            <button type="button" class="btn btn-primary" onclick="onClickDist(this)">North Chart</button>
             </div>
-          </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                 <div class="col-sm-5 mx-auto">
+                  <canvas id="Chart" width="200" height="100" style="visibility: hidden;"></canvas>
+                </div>
+              </div>
+              <br>
+              <div class="col text-center">
+                <div class="multi-button">
+                  <button id="sizeC">Pack Size</button>
+                  <button><-></button>
+                  <button id='countryC'>Country</button>
+                </div>
+              </div>
+            </div>
         </div>
       </div>
     </div>
     <%- include("../partials/dashcode") %>
+   
   </body>
 </html>
+      

@@ -2,13 +2,15 @@
 
 const {Storage} = require('@google-cloud/storage');
 const express = require("express");
-const fs = require('fs')
+const fs = require('fs');
+
 
 const app = new express();
 
 
 const storage = new Storage({
     keyFilename: "deliveries-4f46a-firebase-adminsdk-rqrol-2c98fbf543.json"
+    
     //goto project settings (wheel at left top)
     //service accounts->click generate new private key
     //you will have a key file downloaded - copy to this folder
@@ -27,6 +29,7 @@ uploadFile = async(name) => {
         // Support for HTTP requests made with `Accept-Encoding: gzip`
         gzip: true,
         destination:name,
+        
 
         
         // By setting the option `destination`, you can change the name of the

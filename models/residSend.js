@@ -3,7 +3,7 @@
 
 
 
-
+var qaGen=require('./qrGenerator')
 const redis = require('redis');
 const redisClient = redis.createClient(6379,'127.0.0.1');
 
@@ -11,6 +11,8 @@ const redisClient = redis.createClient(6379,'127.0.0.1');
 
 
 module.exports= function sendToRedis(key,data){ 
+
+
 
 data=JSON.stringify(data) //parse the object to json string
 
@@ -26,9 +28,10 @@ redisClient.set(key,data);
 redisClient.publish('notification', JSON.stringify(data), 
 function(){
     console.log(" send from redis ");
+    qaGen(JSON.parse(data));
 });
 
-///delete
+///
 //redisClient.del('customer_name4');
 
 

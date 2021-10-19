@@ -1,13 +1,14 @@
 var QrCode = require('qrcode-reader');
-var qr = new QrCode();
-
 var fs = require('fs');
-
-
 var Jimp = require("jimp");
-var buffer = fs.readFileSync(__dirname + '/test.png');
-Jimp.read(buffer, function(err, image) {
 
+
+module.exports= function QrReader(namePng,callback) {
+    
+
+var buffer = fs.readFileSync(__dirname+'/'+namePng);
+
+    Jimp.read(buffer, function(err, image) {
     if (err) {
         console.error(err);
         // TODO handle error
@@ -18,8 +19,18 @@ Jimp.read(buffer, function(err, image) {
             console.error(err);
             // TODO handle error
         }
-        console.log(value.result);
+        //console.log(value.result);
+        callback(null,value.result);
+        
         
     };
     qr.decode(image.bitmap);
-});
+
+    })
+
+    
+
+}
+
+
+    
