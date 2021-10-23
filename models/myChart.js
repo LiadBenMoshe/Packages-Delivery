@@ -90,7 +90,7 @@ module.exports = {
     }
     var itemsValue=[];
     for(var i =0 ;i<len;i++){
-      itemsValue.push(params[i][1])
+      itemsValue.push(params[i][2])
     }
 
 

@@ -27,24 +27,13 @@ router.get('/about', function (req, res) {
 
 io.on("connection", function (socket) {
   console.log("analytics connected...");
-  socket.on("clicked", function (name, what) {
+  socket.on("clickedana", function (name, what) {
+    console.log("click analytics!!!")
     showAnalytics()
   })
   
 })
 
-// function showAnalytics() {
-//   makeCSV(function callback() {
-//     console.log("finish file")
-//     getBigMLdata(function name(err,res) {
-//       if(err){}
-//       else{
-//         console.log(res);
-//       } 
-//     });
-//   });
-
-// }
 
 function showAnalytics() {
   getBigMLdata(function name(err,res) {

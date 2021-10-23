@@ -174,6 +174,19 @@ app.get("/", (req, res) => {
       },
 
       {
+        districtId: "none",
+        title: "none",
+        value: mapOfDist.get("eilat"),
+        unit: ".חבילות שנשלחו",
+        fotterIcon: "",
+        fotterText: "hidden",
+        icon: "local_shipping",
+        color: "dark",
+        arrive: mapOfDist.get("eilatArrive"),
+        arriveId: "Eilat",
+      },
+
+      {
         districtId: "eilat",
         title: "אילת",
         value: mapOfDist.get("eilat"),
